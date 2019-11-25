@@ -1,0 +1,29 @@
+{
+    "man_hinh_kham":[
+        {"name":"Khách hàng 1","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"","status":"1","ngay_kham":"21-11-2019","doctor":"2","ly_do_kham":"Đau bụng1","benh_su":"Bệnh nhân đi ngoài phân đen11"},
+        {"name":"Khách hàng 2","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"","status":"2","ngay_kham":"21-11-2019","doctor":"2","ly_do_kham":"Đau bụng2","benh_su":"Bệnh nhân đi ngoài phân đen22"},
+        {"name":"Khách hàng 3","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"9:00","status":"3","ngay_kham":"21-11-2019","doctor":"1","ly_do_kham":"Đau bụng3","benh_su":"Bệnh nhân đi ngoài phân đen33"},
+        {"name":"Khách hàng 4","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"","status":"4","ngay_kham":"21-11-2019","doctor":"3","ly_do_kham":"Đau bụng44","benh_su":"Bệnh nhân đi ngoài phân đen44"}
+    ],
+    "man_hinh_hen_kham":[
+        {"name":"Khách hàng hẹn 1","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"9:00","status":"1"},
+        {"name":"Khách hàng hẹn 2","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"9:00","status":"2"},
+        {"name":"Khách hàng hẹn 3","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"9:00","status":"3"},
+        {"name":"Khách hàng hẹn 4","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"9:00","status":"4"}
+    ],
+    "man_hinh_cho_doc_kq":[
+        {"name":"Khách hàng chờ đọc kq 1","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"9:00","status":"4"},
+        {"name":"Khách hàng chờ đọc kq 2","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"9:00","status":"4"},
+        {"name":"Khách hàng chờ đọc kq 3","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"9:00","status":"4"},
+        {"name":"Khách hàng chờ đọc kq 4","year_of_birth":"1992","sex":"Nam","waiting_time":"1:00","timer":"9:00","status":"4"}
+    ],
+    "man_hinh_ket_thuc_kham":[
+        {"name":"Khách hàng chờ đọc kq 1","year_of_birth":"1992","sex":"Nam","control":"Kê toa cho về", "doctor":"Bác sĩ A", "status":"4"},
+        {"name":"Khách hàng chờ đọc kq 2","year_of_birth":"1992","sex":"Nam","control":"Kê toa cho về", "doctor":"Bác sĩ A", "status":"4"},
+        {"name":"Khách hàng chờ đọc kq 3","year_of_birth":"1992","sex":"Nam","control":"Kê toa cho về", "doctor":"Bác sĩ A", "status":"4"},
+        {"name":"Khách hàng chờ đọc kq 4","year_of_birth":"1992","sex":"Nam","control":"Kê toa cho về", "doctor":"Bác sĩ A", "status":"4"}
+    ],
+    "ds_xet_nghiem":[
+        {"name":"Định lượng Glucose (Máu)","kq_xn":"4.0","chi_so_bt":"(4.10 - 5.90)", "dvt":"mmol/l","ngay_cd":"20/10/2019"}
+    ]
+}

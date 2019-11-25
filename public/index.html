@@ -1,17 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>hello-world</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but hello-world doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>hello-world</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style3.css">
+
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+    <!-- Font Awesome JS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="js/jquery.datetimepicker.min.css" />
+    <link rel="stylesheet" href="js/selectize.css">
+
+    <!-- tree grid -->
+    <link href="dist/css/jquery.treegrid.css" rel="stylesheet">
+  <style>
+    #app{margin-top: 0 !important;}
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but hello-world doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+  integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+  crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+  integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+  crossorigin="anonymous"></script>
+
+<!-- jQuery Custom Scroller CDN -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script> -->
+
+<script src="js/jquery.datetimepicker.full.min.js"></script>
+<script type="text/javascript" src="js/draw_table.js"></script>
+<script type="text/javascript" src="js/search.js"></script>
+<script src="js/selectize.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+      $('#select-bs').selectize();
+
+      $("#sidebar").mCustomScrollbar({
+          theme: "minimal"
+      });
+
+      $('#dismiss, .overlay, .row-table').on('click', function () {
+          $('#sidebar').removeClass('active');
+          $('.overlay').removeClass('active');
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+          $('#sidebar').addClass('active');
+          $('.overlay').addClass('active');
+          $('.collapse.in').toggleClass('in');
+          $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+
+
+      $("#sidebarProcess").mCustomScrollbar({
+          theme: "minimal"
+      });
+
+      $('#dismissProcess, .overlay').on('click', function () {
+          $('#sidebarProcess').removeClass('active');
+          $('.overlay').removeClass('active');
+      });
+
+      $('#sidebarCollapseProcess').on('click', function () {
+          $('#sidebarProcess').addClass('active');
+          $('.overlay').addClass('active');
+          $('.collapse.in').toggleClass('in');
+          $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+
+
+      $(".clickable-row").click(function () {
+          $(".clickable-row").removeClass('active');
+          $(this).addClass('active');
+      });
+
+      $("#search").keyup(function () {
+          _this = this;
+          $.each($("table tbody tr"), function () {
+              if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                  $(this).hide();
+              else
+                  $(this).show();
+          });
+      });
+
+      $("#search_cdha").keyup(function () {
+          _this = this;
+          $.each($("table tbody tr"), function () {
+              if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                  $(this).hide();
+              else
+                  $(this).show();
+          });
+      });
+  });
+
+  $('#datetimepicker').datetimepicker();
+  $('.datetimepicker').datetimepicker();
+  $('#input-xn').keyup(function () {
+      table_search($('#input-xn').val(), $('#table-xn tbody tr'), '0123');
+  });
+
+  $("#check_all_xn").click(function () {
+      var status = this.checked;
+      $("input.selected_xn").each(function () {
+          this.checked = status;
+      });
+  });
+
+  $(".remove-thuoc").click(function () {
+      alert("abc");
+      $(this).remove();
+  });
+
+  $("#check_all_cdha").click(function () {
+      var status = this.checked;
+      $("input.selected_cdha").each(function () {
+          this.checked = status;
+      });
+  });
+  $('#select-country').selectize();
+  $('.select-country').selectize();
+  $('#select-bs').selectize();
+  $('#select-bs-1').selectize();
+
+
+
+  function removeThuoc(id) {
+      $("#ke-thuoc-" + id).hide();
+  }
+
+  function addThuoc() {
+      var count = $('#chi-dinh-thuoc').find('tr').length;
+      console.log(count);
+      var html = '<tr id="ke-thuoc-' + count + '"><td class="col-1"><input type="radio" class="form-control"></td><td class="col-3">Abrocto 10ml (Ambroxol)</td><td class="col-1">Ống</td><td class="col-2">Ngày 2 viên chia 2 lần sáng tối</td><td class="col-2"><input type="text" value="1" class="form-control"><td class="col-2">8.346</td><td class="col-1"><span class="fa fa-trash" onclick="removeThuoc(' + count + ');"></span></td></tr>';
+
+      $("#body-chi-dinh-thuoc").append(html);
+  }
+</script>
+<script type="text/javascript">
+  $('#sortable').sortable();
+</script>
+
+<script src="dist/js/jquery.treegrid.min.js"></script>
+<script src="js/custom.js"></script>
+</body>
+
 </html>
