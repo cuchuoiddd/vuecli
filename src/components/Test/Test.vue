@@ -451,19 +451,19 @@
                             <tr class="treegrid-2 treegrid-parent-1">
                               <td colspan="14" class="font-600">Xét nghiệm</td>
                             </tr>
-                            <tr class="treegrid-3 treegrid-parent-2 color-red">
-                              <td class="align-middle text-center">1</td>
+                            <tr class="" v-for="(item, index) in data_chi_dinh" :key="index">
+                              <td class="align-middle text-center">{{index +1}}</td>
                               <td class="align-middle text-center">
-                                <input type="checkbox" class="daThucHien" />
+                                <input type="checkbox" class="daThucHien"  />
                               </td>
-                              <td class="align-middle">nước tiểu</td>
-                              <td class="align-middle">SH nước tiểu</td>
-                              <td class="align-middle">Nội 6</td>
-                              <td class="align-middle">Nguyễn văn Lâm</td>
-                              <td class="align-middle">50.000</td>
-                              <td class="align-middle">50.000</td>
+                              <td class="align-middle">{{item.name}}</td>
+                              <td class="align-middle">{{item.nhom_dv}}</td>
+                              <td class="align-middle">{{item.khoa_phong}}</td>
+                              <td class="align-middle">{{item.doctor}}</td>
+                              <td class="align-middle">{{item.gia_dv}}</td>
+                              <td class="align-middle">{{item.gia_bh}}</td>
                               <td class="align-middle text-center">
-                                <input type="checkbox" />
+                                <input type="checkbox" :value="item.tu_chi_tra"/>
                               </td>
                               <td>Mã phiếu</td>
                               <td class="align-middle">
@@ -478,74 +478,8 @@
                                   <option value>Cơ sở 2</option>
                                 </select>
                               </td>
-                              <td class="align-middle">05/01/2019</td>
-                              <td class="align-middle">05/01/2019</td>
-                            </tr>
-                            <tr class="treegrid-4 treegrid-parent-2 color-warning">
-                              <td class="align-middle text-center">2</td>
-                              <td class="align-middle text-center">
-                                <input type="checkbox" class="daThanhToan" />
-                              </td>
-                              <td class="align-middle">định lượng urê</td>
-                              <td class="align-middle">SH máu</td>
-                              <td class="align-middle">Nội 6</td>
-                              <td class="align-middle">Nguyễn văn Lâm</td>
-                              <td class="align-middle">30.000</td>
-                              <td class="align-middle">30.000</td>
-                              <td class="align-middle text-center">
-                                <input type="checkbox" />
-                              </td>
-                              <td>Mã phiếu</td>
-                              <td class="align-middle">
-                                <select name id class="custom1-select">
-                                  <option value>Tầng 1 nhà A</option>
-                                  <option value>Tầng 2 nhà A</option>
-                                </select>
-                              </td>
-                              <td class="align-middle">
-                                <select name id class="custom1-select">
-                                  <option value>Cơ sở 1</option>
-                                  <option value>Cơ sở 2</option>
-                                </select>
-                              </td>
-                              <td class="align-middle">05/01/2019</td>
-                              <td class="align-middle">05/01/2019</td>
-                            </tr>
-                            <tr class="treegrid-5">
-                              <td colspan="14" class="font-600">Phòng khám sản</td>
-                            </tr>
-                            <tr class="treegrid-6 treegrid-parent-5">
-                              <td colspan="14" class="font-600">Siêu âm</td>
-                            </tr>
-                            <tr class="treegrid-7 treegrid-parent-6">
-                              <td class="align-middle text-center">1</td>
-                              <td class="align-middle text-center">
-                                <input type="checkbox" />
-                              </td>
-                              <td class="align-middle">Siêu âm bụng</td>
-                              <td class="align-middle">Siêu âm</td>
-                              <td class="align-middle">Nội 6</td>
-                              <td class="align-middle">Nguyễn văn Lâm</td>
-                              <td class="align-middle">100.000</td>
-                              <td class="align-middle">100.000</td>
-                              <td class="align-middle text-center">
-                                <input type="checkbox" />
-                              </td>
-                              <td>Mã phiếu</td>
-                              <td class="align-middle">
-                                <select name id class="custom1-select">
-                                  <option value>Tầng 1 nhà A</option>
-                                  <option value>Tầng 2 nhà A</option>
-                                </select>
-                              </td>
-                              <td class="align-middle">
-                                <select name id class="custom1-select">
-                                  <option value>Cơ sở 1</option>
-                                  <option value>Cơ sở 2</option>
-                                </select>
-                              </td>
-                              <td class="align-middle">05/01/2019</td>
-                              <td class="align-middle">05/01/2019</td>
+                              <td class="align-middle">{{item.ngay_chi_dinh}}</td>
+                              <td class="align-middle">{{item.ngay_thuc_hien}}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -558,24 +492,14 @@
                         <div class="row">
                           <div class="col-6">
                             <input type="text" id="timKiemDichVu" placeholder="Chọn dịch vụ" class="form-control"
-                              style="margin-bottom: 10px;" />
-                              <div class="" v-if="is_show_dv">
+                              style="margin-bottom: 10px;" v-model="search" @focus="ontogglePicker()"/>
+                              <div class="aaa" v-if="is_show_dv" >
                                 <table>
-                                  <tr>
-                                    <td>icd</td>
-                                    <td>ten thuocthuoc</td>
-                                  </tr>
-                                  <tr>
-                                    <td>icd</td>
-                                    <td>ten thuocthuoc</td>
-                                  </tr>
-                                  <tr>
-                                    <td>icd</td>
-                                    <td>ten thuocthuoc</td>
-                                  </tr>
-                                  <tr>
-                                    <td>icd</td>
-                                    <td>ten thuocthuoc</td>
+                                  <tr v-for="(item, index) in filteredList" :key="index" @click="choseService(item)">
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.nhom_dv}}</td>
+                                    <td>{{item.gia_dv}}</td>
+                                    <td>{{item.gia_bh}}</td>
                                   </tr>
                                 </table>
                               </div>

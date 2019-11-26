@@ -25,5 +25,12 @@
     ],
     "ds_xet_nghiem":[
         {"name":"Định lượng Glucose (Máu)","kq_xn":"4.0","chi_so_bt":"(4.10 - 5.90)", "dvt":"mmol/l","ngay_cd":"20/10/2019"}
+    ],
+    "ds_chi_dinh":[
+        {"name":"Nước tiểu","nhom_dv":"SH nước tiểu","khoa_phong":"Nội 6","doctor":"Nguyễn Văn Lâm","gia_dv":"50.000","gia_bh":"50.000","tu_chi_tra":true,"ngay_chi_dinh":"05/01/2019","ngay_thuc_hien":"05/01/2019"}
+    ],
+    "ds_dich_vu":[
+        {"name":"Định lượng urê","nhom_dv":"SH máu","gia_dv":"50.000","gia_bh":"50.000"},
+        {"name":"Siêu âm bụng","nhom_dv":"Siêu âm","gia_dv":"100.000","gia_bh":"100.000"}
     ]
 }
