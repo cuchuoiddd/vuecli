@@ -1,6 +1,9 @@
 import data_json from './../../assets/data'
+import TongQuan from '../TongQuan/TongQuan.vue'
+import ChiSoSinhTon from '../ChiSoSinhTon/ChiSoSinhTon.vue'
 export default {
     name: "Test",
+    components:{TongQuan,ChiSoSinhTon},
     props: {},
     data() {
         return {
