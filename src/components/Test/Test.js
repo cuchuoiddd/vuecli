@@ -1,67 +1,62 @@
 import data_json from './../../assets/data'
 import TongQuan from '../TongQuan/TongQuan.vue'
 import ChiSoSinhTon from '../ChiSoSinhTon/ChiSoSinhTon.vue'
+import KetLuan from '../KetLuan/KetLuan.vue'
+import XetNghiem from '../XetNghiem/XetNghiem.vue'
+import KhachHang from '../KhachHang/KhachHang.vue'
 export default {
     name: "Test",
-    components:{TongQuan,ChiSoSinhTon},
+    components:{TongQuan,ChiSoSinhTon,KetLuan,XetNghiem,KhachHang},
     props: {},
     data() {
         return {
             data: data_json.man_hinh_kham,
+            nhom_kh:'hen_kham',
             data_xn: data_json.ds_xet_nghiem,
             data_chi_dinh: data_json.ds_chi_dinh,
             data_dich_vu: data_json.ds_dich_vu,
-            item_select: null,
             ds_kh: 'cho_kham',
-
+            item_select: null,
             inputXetNghiem: null, //check lay xet nghiem,
             item_checked: null,
-            kq_cls: '',
             is_show_dv: false,
 
-            search: ''
+            search: '',
+            abc:"sdfsadf"
 
         };
     },
     created() {
-        console.log(this.data_xn);
-        console.log(this.data1);
-        console.log(this.data_dich_vu);
-
     },
     methods: {
+        khSelect(e){
+            this.item_select = e;
+            console.log(2222222,e)
+        },
         handleChange(e) {
             this.ds_kh = e.target.value;
             switch (e.target.value) {
                 case 'hen_kham':
-                    this.data = data_json.man_hinh_kham
+                    this.data = data_json.man_hinh_hen_kham;
+                    this.nhom_kh = 'hen_kham';
                     break;
                 case 'cho_doc_kq':
                     this.data = data_json.man_hinh_cho_doc_kq
+                    this.nhom_kh = 'cho_doc_kq'
                     break;
                 case 'ket_thuc_kham':
                     this.data = data_json.man_hinh_ket_thuc_kham
+                    this.nhom_kh = 'ket_thuc_kham'
                     break;
 
                 default: 'cho_kham'
                     this.data = data_json.man_hinh_kham;
+                    this.nhom_kh = 'cho_kham'
                     break;
             }
         },
-        selectBenhNhan(item) {
-            this.item_select = item;
-            console.log(34234234, this.item_select)
-        },
         checkXetNghiem(item) {
             this.item_checked = item;
-        },
-        chonXN() {
-            if (this.inputXetNghiem) {
-                this.kq_cls = this.item_checked.name + ' ' + this.item_checked.kq_xn + ' ' + this.item_checked.dvt;
-            } else {
-                this.kq_cls = ''
-            }
-
         },
         ontogglePicker() { this.is_show_dv = true; },
         offtogglePicker() { this.is_show_dv = false; },
@@ -88,11 +83,7 @@ export default {
         }
 
     },
-    filters: {
-        status_name: function (id) {
-            return id == '1' ? 'Đang khám' : id == '2' ? 'Ưu tiên' : id == '3' ? 'Hẹn khám' : 'Chờ đọc KQ'
-        }
-    },
+    
     computed: {
         filteredList() {
             return this.data_dich_vu.filter(post => {

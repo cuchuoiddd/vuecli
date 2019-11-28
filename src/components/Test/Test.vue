@@ -52,7 +52,8 @@
         </div>
         <div class="">
           <!-- màn hình khám -->
-        <table class="table table-hover table-borderless font-14" v-if="ds_kh === 'cho_kham'">
+          <KhachHang :data="data" :nhom_kh="nhom_kh" @ageWasUpdated="khSelect($event)"/>
+        <!-- <table class="table table-hover table-borderless font-14" v-if="ds_kh === 'cho_kham'">
           <thead>
             <tr>
               <th class="text-center">STT</th>
@@ -75,9 +76,9 @@
               <td class="text-center" @click="selectBenhNhan(item)">{{item.timer}}</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
         <!-- màn hình hẹn khám -->
-        <table class="table table-hover table-borderless font-14" v-else-if="ds_kh === 'hen_kham'">
+        <!-- <table class="table table-hover table-borderless font-14" v-else-if="ds_kh === 'hen_kham'">
           <thead>
             <tr>
               <th class="text-center">STT</th>
@@ -98,9 +99,9 @@
               <td class="text-center">{{item.timer}}</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
         <!-- màn hình chờ đọc kết quả -->
-        <table class="table table-hover table-borderless font-14" v-else-if="ds_kh === 'cho_doc_kq'">
+        <!-- <table class="table table-hover table-borderless font-14" v-else-if="ds_kh === 'cho_doc_kq'">
           <thead>
             <tr>
               <th class="text-center">STT</th>
@@ -145,9 +146,9 @@
               <td class="text-center">Chờ đọc KQ</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
         <!-- màn hình kết thúc khám -->
-        <table class="table table-hover table-borderless font-14" v-else-if="ds_kh === 'ket_thuc_kham'">
+        <!-- <table class="table table-hover table-borderless font-14" v-else-if="ds_kh === 'ket_thuc_kham'">
           <thead>
             <tr>
               <th class="text-center">STT</th>
@@ -166,7 +167,6 @@
               <td class="text-center">Nam</td>
               <td class="text-center">Kê toa cho về</td>
               <td class="text-center">Bác sĩ A</td>
-              <!-- <td><img src="images/capcuu.png" class="icon-image"></td> -->
             </tr>
             <tr class="row-table">
               <td class="text-center">2</td>
@@ -193,7 +193,7 @@
               <td class="text-center">Bác sĩ A</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
       </nav>
 
@@ -554,469 +554,7 @@
 
               <!-- Kết luận -------------------------->
               <div id="ket_luan" class="tab-pane fade ket-luan">
-                <div class="card card-custom min-height-85-vh">
-                  <div class="card-body" style="padding-bottom: 0;">
-                    <div class="row mt-3">
-                      <div class="col-2 font-700 max-width-11">
-                        <span class="color-red">Bệnh chính (*)</span>
-                      </div>
-                      <div class="col-2">
-                        <input type="text" style="text-transform: uppercase;" placeholder="Mã ICD" id="benh_chinh_icd10"
-                          class="form-control form-control-custom" />
-                      </div>
-                      <div class="col-8">
-                        <input type="text" id="benh_chinh_text" class="form-control form-control-custom" />
-
-                        <!-- <select id="select-bs">
-                                                        <option>Viêm phế quản cấp</option>
-                                                        <option>Viêm phế quản cấp 1</option>
-                                                        <option>Viêm phế quản cấp 2</option>
-                                                        <option>Viêm phế quản cấp 3</option>
-                        </select>-->
-                      </div>
-                    </div>
-                    <div class="row mt-1">
-                      <div class="col-2 font-700 max-width-11">Bệnh kèm theo:</div>
-                      <div class="col-2">
-                        <input type="text" id="benh_kem_theo_icd10" class="form-control form-control-custom" />
-                      </div>
-                      <div class="col-8">
-                        <input type="text" id="benh_kem_theo_text" class="form-control form-control-custom" />
-                      </div>
-                    </div>
-                    <div class="row mt-2">
-                      <div class="col-2 font-700 max-width-11">Hướng điều trị:</div>
-                      <div class="col-2">
-                        <select name id="huongDieuTri" class="mySelect form-control form-control-custom">
-                          <option value></option>
-                          <option value="ke_toa_cho_ve">Kê toa cho về</option>
-                          <option value="cho_ve_khong_toa">Cho về không toa</option>
-                          <option value="nhap_vien">Nhập viện</option>
-                          <option value="chuyen_vien">Chuyển viện</option>
-                          <option value="chuyen_phong_kham">Chuyển phòng khám</option>
-                          <option value="chuyen_kham_chinh">Chuyển khám chính</option>
-                          <option value="dieu_tri_ngoai_tru">Điều trị ngoại trú</option>
-                          <option value="bo_ve">Bỏ về</option>
-                          <option value="tu_vong">Tử vong</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row mt-2">
-                      <div class="col-2 font-700 max-width-11">Hẹn khám lại:</div>
-                      <div class="col-2 max-width-11">
-                        Sau
-                        <input type="text" style="width:33px;" />
-                        ngày
-                      </div>
-                      <div class="col-2 max-width-11 padding-right-0 align-center">
-                        <span>
-                          Ngày khám
-                          lại:
-                        </span>
-                      </div>
-                      <div class="col-2 max-width-12 padding-left-0">
-                        <input type="date" class="form-control form-control-custom" />
-                      </div>
-                      <div class="col-2 max-width-14">
-                        Giờ hẹn &nbsp;
-                        <input class="form-control-custom" type="text" id="time" placeholder="Time"
-                          style="width:81px;" />
-                      </div>
-                      <div class="col-1 max-width-11 text-right align-center">
-                        <span>
-                          Ghi
-                          chú:
-                        </span>
-                      </div>
-                      <div class="col-3 padding-right-0">
-                        <input type="text" class="form-control form-control-custom" />
-                      </div>
-                    </div>
-                    <div id="keToaChoVe" class="row" style="display: none;">
-                      <div class="mt-3 card card-custom min-height-65-vh">
-                        <div class="card-body" style="padding-top: 0;">
-                          <table class="table table-hover font-14 tree-basic">
-                            <thead>
-                              <tr>
-                                <th class="text-center">STT</th>
-                                <th class="text-center align-middle">
-                                  <input type="checkbox" />
-                                </th>
-                                <th class="text-center">Kho thuốc</th>
-                                <th class>Tên thuốc</th>
-                                <th class="text-center">Hàm lượng</th>
-                                <th class="text-center">Hoạt chất</th>
-                                <th class="text-center">Số lượng</th>
-                                <th class="text-center">Đơn giá</th>
-                                <th class="text-center">Đơn vị</th>
-                                <th class>Cách dùng</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr class="treegrid-2 expanded">
-                                <td colspan="8" class="font-700">Phòng khám TMH</td>
-                              </tr>
-                              <tr class="treegrid-3 treegrid-parent-2">
-                                <td class="text-center">1</td>
-                                <td class="text-center align-middle">
-                                  <input type="checkbox" />
-                                </td>
-                                <td class="text-center">tủ trực TMH</td>
-                                <td>amocilin</td>
-                                <td class="text-center">500mg</td>
-                                <td class="text-center">amoxilin</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">25.000</td>
-                                <td class="text-center">viên</td>
-                                <td>uống sau ăn</td>
-                                <td>
-                                  <i class="fa fa-trash pointer" aria-hidden="true"></i>
-                                </td>
-                              </tr>
-                              <tr class="treegrid-4 treegrid-parent-2">
-                                <td class="text-center">2</td>
-                                <td class="text-center align-middle">
-                                  <input type="checkbox" />
-                                </td>
-                                <td class="text-center">nhà thuốc</td>
-                                <td>panadol</td>
-                                <td class="text-center">500mg</td>
-                                <td class="text-center">paracetamol</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">25.000</td>
-                                <td class="text-center">viên</td>
-                                <td>uống sau ăn</td>
-                                <td>
-                                  <i class="fa fa-trash pointer" aria-hidden="true"></i>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <div class="card-footer">
-                          <div class="ke-thuoc">
-                            <div class="row">
-                              <div class="col-2 color-red">Tạm ứng: 1.000.000</div>
-                              <div class="col-2 color-red">Tổng tiền: 50.000</div>
-                              <div class="col-2 color-red">BHYT trả: 10.000</div>
-                              <div class="col-2 color-red">BN thanh toán: 40.000</div>
-                              <div class="col-2"></div>
-                              <div class="col-2">
-                                <div class="dropdown">
-                                  <button class="btn dropdown-toggle font-13 btn-sm btn-don-thuoc" type="button"
-                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    <i class="fa fa-address-book" aria-hidden="true"></i> Đơn thuốc
-                                  </button>
-                                  <div class="dropdown-menu font-13" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" aria-hidden="true" data-toggle="modal"
-                                      data-target=".modal-ke-toa-nhanh">
-                                      Đơn thuốc
-                                      mẫu
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                      Đơn thuốc
-                                      cũ
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row mt-2 font-13">
-                              <div class="col-2">
-                                <div class="form-group margin-bottom-0">
-                                  <label for>Kho thuốc:</label>
-                                  <select name id class="form-control form-control-custom">
-                                    <option value>Kho A</option>
-                                    <option value>Kho B</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-3">
-                                <div class="form-group margin-bottom-0">
-                                  <label for>Tên thuốc</label>
-                                  <input type="text" class="form-control form-control-custom" />
-                                </div>
-                              </div>
-                              <div class="col-1">
-                                <div class="form-group margin-bottom-0">
-                                  <label for>Đơn vị</label>
-                                  <input id="ke_thuocDonVi" type="text" class="form-control form-control-custom"
-                                    readonly value="Viên" />
-                                </div>
-                              </div>
-                              <div class="col-2 max-width-11">
-                                <div class="form-group margin-bottom-0">
-                                  <label for>Số Lượng</label>
-                                  <input id="ke_thuocSoLuong" type="number" class="form-control form-control-custom" />
-                                </div>
-                              </div>
-                              <div class="col-2 max-width-11">
-                                <div class="form-group margin-bottom-0">
-                                  <label for>Lượng dùng</label>
-                                  <input id="ke_thuocLuongDung" type="number"
-                                    class="form-control form-control-custom" />
-                                </div>
-                              </div>
-                              <div class="col-2 max-width-11">
-                                <div class="form-group margin-bottom-0">
-                                  <label for>Số lần</label>
-                                  <input id="ke_thuocSoLan" type="number" class="form-control form-control-custom" />
-                                </div>
-                              </div>
-                              <div class="col-2">
-                                <div class="form-group margin-bottom-0">
-                                  <label for>sử dụng</label>
-                                  <input id="ke_thuocSuDung" type="text" class="form-control form-control-custom" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row height-35 mt-1">
-                              <div class="col-2 text-right font-13">
-                                <label for>
-                                  Cách
-                                  dùng:
-                                </label>
-                              </div>
-                              <div class="col-10">
-                                <div class="form-group margin-bottom-0">
-                                  <input id="ke_thuocCachDung" type="text" class="form-control form-control-custom" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row height-35">
-                              <div class="col-2 text-right font-13">
-                                <label for>
-                                  Lời dặn
-                                  bác
-                                  sĩ:
-                                </label>
-                              </div>
-                              <div class="col-10">
-                                <div class="form-group margin-bottom-0">
-                                  <input type="text" class="form-control form-control-custom" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="nhapVien" style="display: none;">
-                      <div class="card card-custom">
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-2 max-width-11 font-700">Khoa nhập</div>
-                            <div class="col-3">
-                              <select class="form-control form-control-custom">
-                                <option value>Khoa Nội</option>
-                                <option value>Khoa Thận</option>
-                                <option value>Khoa Ung Bướu</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-footer"></div>
-                      </div>
-                    </div>
-                    <div id="chuyenPhongKham" style="display: none;">
-                      <div class="card card-custom">
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-2 max-width-11 font-700">Chuyển đến</div>
-                            <div class="col-3">
-                              <select class="form-control form-control-custom">
-                                <option value>Phòng khám Nội</option>
-                                <option value>Phòng khám Thận</option>
-                                <option value>Phòng khám Ung Bướu</option>
-                              </select>
-                            </div>
-                            <div class="col-2 max-width-11 font-700">Hình thức</div>
-                            <div class="col-3">
-                              <select class="form-control form-control-custom">
-                                <option value></option>
-                                <option value>Khám giáo sư</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-footer"></div>
-                      </div>
-                    </div>
-                    <div id="chuyenKhamChinh" style="display: none;">
-                      <div class="card card-custom">
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-2 max-width-11 font-700">Chuyển đến</div>
-                            <div class="col-3">
-                              <select class="form-control form-control-custom">
-                                <option value>Phòng khám Nội</option>
-                                <option value>Phòng khám Thận</option>
-                                <option value>Phòng khám Ung Bướu</option>
-                              </select>
-                            </div>
-                            <div class="col-2 max-width-11 font-700">Hình thức</div>
-                            <div class="col-3">
-                              <select class="form-control form-control-custom">
-                                <option value></option>
-                                <option value>Khám Nội 0đ</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-footer"></div>
-                      </div>
-                    </div>
-                    <div id="tuVong" style="display: none;">
-                      <div class="card card-custom">
-                        <div class="card-body">
-                          <div class="row">
-                            <h6 style="color: #007944;">THÔNG TIN TỬ VONG</h6>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">Ngày tử vong</div>
-                            <div class="col-3">
-                              <input type="date" class="form-control form-control-custom" />
-                            </div>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">Nguyên nhân tử vong</div>
-                            <div class="col-3">
-                              <select class="form-control form-control-custom">
-                                <option value>Tai nạn</option>
-                                <option value>Sốc thuốc</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">Tình trạng tử vong</div>
-                            <div class="col-3">
-                              <select class="form-control form-control-custom">
-                                <option value>Tại chỗ</option>
-                                <option value>Trước lúc đến</option>
-                                <option value>Trong 24h</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-footer"></div>
-                      </div>
-                    </div>
-                    <div id="chuyenVien" style="display: none;">
-                      <div class="card card-custom">
-                        <div class="card-body">
-                          <div class="row">
-                            <h6 style="color: #007944;">THÔNG TIN CHUYỂN VIỆN</h6>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">Tuyến chuyển</div>
-                            <div class="col-3">
-                              <select class="form-control form-control-custom">
-                                <option value>Tuyến trên</option>
-                                <option value>Tuyến dưới</option>
-                              </select>
-                            </div>
-                            <div class="col-1">Lý do</div>
-                            <div class="col-6">
-                              <input type="text" class="form-control form-control-custom" />
-                            </div>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">
-                              <label for>Dấu hiệu lâm sàng</label>
-                            </div>
-                            <div class="col-10">
-                              <input type="text" class="form-control form-control-custom" />
-                            </div>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">
-                              <label for>Các xét nghiệm</label>
-                            </div>
-                            <div class="col-10">
-                              <input type="text" class="form-control form-control-custom" />
-                            </div>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">
-                              <label for>Thuốc đã dùng</label>
-                            </div>
-                            <div class="col-10">
-                              <input type="text" class="form-control form-control-custom" />
-                            </div>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">
-                              <label for>Tình trạng người bệnh</label>
-                            </div>
-                            <div class="col-10">
-                              <input type="text" class="form-control form-control-custom" />
-                            </div>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">
-                              <label for>Hướng điều trị</label>
-                            </div>
-                            <div class="col-10">
-                              <input type="text" class="form-control form-control-custom" />
-                            </div>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">
-                              <label for>Phương tiện vận chuyển</label>
-                            </div>
-                            <div class="col-10">
-                              <input type="text" class="form-control form-control-custom" />
-                            </div>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">
-                              <label for>Người đưa đi</label>
-                            </div>
-                            <div class="col-10">
-                              <input type="text" class="form-control form-control-custom" />
-                            </div>
-                          </div>
-                          <div class="row mt-1">
-                            <div class="col-2">
-                              <label for>Chuyển tuyến lúc</label>
-                            </div>
-                            <div class="col-10">
-                              <input type="text" class="form-control form-control-custom" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-footer"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                    <div class="row float-right mt-2">
-                      <button class="btn btn-success mr-2 btn-custom btn-sm" style="width:82px; height:32px"
-                        onclick="luuKetLuan()">Lưu</button>
-
-                      <button class="btn btn-success mr-2 btn-custom btn-sm"
-                        style="width:82px; height:32px">Sửa</button>
-                      <div class="input-group mb-3 div-in">
-                        <button class="btn btn-success mr-2 btn-in btn-sm" style="width:82px; height:32px">In</button>
-                        <div class="input-group-append input-group-append-custom">
-                          <select class="select-custom" name id>
-                            <option class="option-custom" value>In đơn thuốc</option>
-                            <option class="option-custom" value>In phiếu vào viện</option>
-                            <option class="option-custom" value>In phiếu chuyển viện</option>
-                            <option class="option-custom" value>In bảng kê chi phí</option>
-                          </select>
-                        </div>
-                      </div>
-                      <button class="btn btn-success mr-2 btn-custom btn-sm" data-toggle="modal"
-                        data-target="#exampleModal2" style="height: 32px;">
-                        Kết thúc
-                        khám
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <KetLuan/>
               </div>
               <!-- End kết luận -------------------------->
 
@@ -1127,157 +665,7 @@
                       </ul>
                       <div class="tab-content col-12">
                         <div id="tong_quan" class="tab-pane fade show active">
-                          <div class="row mt-2">
-                            <div class="col-2 margin-right-30">
-                              <label class="text-label">
-                                Ngày
-                                khám:
-                              </label>
-                            </div>
-                            <div class="col-3">
-                              <input id="datetimepicker" type="text" class="form-control form-control-custom"/>
-                            </div>
-                            <div class="col-2">
-                              <label class="text-label">Bác sĩ khám:</label>
-                            </div>
-                            <div class="col-4">
-                              <select name id class="form-control form-control-custom">
-                                <option value='1'>Bác sĩ 1</option>
-                                <option value='2'>Bác sĩ 2</option>
-                                <option value='3'>Bác sĩ 3</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="row mt-2">
-                            <div class="col-2 margin-right-30">
-                              <label class="text-label">
-                                Lý
-                                do
-                                khám:
-                              </label>
-                            </div>
-                            <div class="col-9">
-                              <div class="form-control form-control-custom">Đau bụng</div>
-                            </div>
-                          </div>
-
-                          <div class="row mt-2">
-                            <div class="col-2 margin-right-30">
-                              <label class="text-label">
-                                Bệnh
-                                sử:
-                              </label>
-                            </div>
-                            <div class="col-9">
-                              <span class="form-control">
-                                Bệnh nhân đi ngoài phân đen,đầy
-                                bụng-->khám
-                              </span>
-                            </div>
-                          </div>
-                          <div class="row mt-2">
-                            <div class="col-2 margin-right-30">
-                              <label class="text-label">
-                                Tiền sử
-                                bệnh:
-                              </label>
-                            </div>
-                            <div class="col-9">
-                              <span class="form-control">
-                                Viêm dạ dày trào ngược thực
-                                quản/Trĩ
-                                nội
-                                độ I-II
-                              </span>
-                            </div>
-                          </div>
-
-                          <div class="row mt-2">
-                            <div class="col-2 margin-right-30">
-                              <label class="text-label">
-                                Toàn
-                                thân:
-                              </label>
-                            </div>
-                            <div class="col-9">
-                              <span class="form-control">
-                                Thể trạng trung bình, da niêm mạc
-                                bình
-                                thường không phù, không xuất huyết dưới da
-                              </span>
-                            </div>
-                          </div>
-                          <div class="row mt-2">
-                            <div class="col-2 margin-right-30">
-                              <label class="text-label">
-                                Bộ
-                                phận:
-                              </label>
-                            </div>
-                            <div class="col-9">
-                              <span class="form-control">
-                                - Tim nhịp đều - Phổi không có
-                                ral -
-                                Bụng
-                                không chướng, gan lá lách không sờ thấy, không có điểm
-                                đau
-                                khu
-                                trú - Các bộ phận khác hiện tại không có gì đặc
-                                biệt
-                              </span>
-                            </div>
-                          </div>
-
-                          <div class="row mt-2">
-                            <div class="col-2 margin-right-30">
-                              <label class="text-label">
-                                Kết
-                                quả
-                                CLS:
-                              </label>
-                            </div>
-                            <div class="col-9">
-                              <span class="form-control">a</span>
-                            </div>
-                          </div>
-                          <div class="row mt-2">
-                            <div class="col-2 margin-right-30">
-                              <label class="text-label">
-                                Chẩn
-                                đoán:
-                              </label>
-                            </div>
-                            <div class="col-9">
-                              <span class="form-control">J20 Viêm phế quản cấp</span>
-                            </div>
-                          </div>
-                          <div class="row mt-2">
-                            <div class="col-2 margin-right-30">
-                              <label class="text-label">
-                                Hướng
-                                điều
-                                trị:
-                              </label>
-                            </div>
-                            <div class="col-9">
-                              <span class="form-control">Cấp toa cho về</span>
-                            </div>
-                          </div>
-                          <div class="row mt-2">
-                            <div class="col-2 margin-right-30">
-                              <label class="text-label">
-                                Kết
-                                luận:
-                              </label>
-                            </div>
-                            <div class="col-9">
-                              <span class="form-control">
-                                J20 Viêm phế quản cấp; cấp toa
-                                cho
-                                về
-                              </span>
-                            </div>
-                          </div>
+                          <TongQuan :isHistory="isHistory = true"/>  
                         </div>
                         <div id="thuoc" class="tab-pane fade">
                           <div class="col-12">
@@ -1343,47 +731,7 @@
                           <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                               aria-labelledby="pills-home-tab">
-                              <table class="table table-bordered tree-basic font-14">
-                                <thead>
-                                  <tr>
-                                    <th>Ngày có kết quả</th>
-                                    <th>Chỉ số</th>
-                                    <th>Kết quả xét nghiệm</th>
-                                    <th>Chỉ số bình thường</th>
-                                    <th>Đơn vị tính</th>
-                                    <th>Ngày chỉ định</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr class="treegrid-1 expanded">
-                                    <td class="font-700" colspan="6">
-                                      Phòng khám ung
-                                      bướu
-                                    </td>
-                                  </tr>
-                                  <tr class="treegrid-2 treegrid-parent-1">
-                                    <td class="font-700" colspan="6">
-                                      <input type="checkbox" /> 28/10/2019
-                                    </td>
-                                  </tr>
-                                  <tr class="treegrid-3 treegrid-parent-2">
-                                    <td class="font-700" colspan="6">
-                                      <input type="checkbox" /> Sinh hóa máu
-                                    </td>
-                                  </tr>
-                                  <tr class="treegrid-4 treegrid-parent-3">
-                                    <td>
-                                      <input type="checkbox" /> Định lượng Glucose
-                                      (Máu)
-                                    </td>
-                                    <td></td>
-                                    <td class="color-red">4.0</td>
-                                    <td>(4.10 - 5.90)</td>
-                                    <td>mmol/l</td>
-                                    <td>20/10/2019</td>
-                                  </tr>
-                                </tbody>
-                              </table>
+                              <XetNghiem/>
                             </div>
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                               aria-labelledby="pills-profile-tab">...</div>
@@ -1407,8 +755,13 @@
               <!-- Khám bệnh ---------------------->
               <div id="home" class="tab-pane active">
                 <div class="row mt-3">
-                  <TongQuan/>
-                  <ChiSoSinhTon/>
+                  <div class="col-9  min-height-85-vh">
+                    <TongQuan :item_select="item_select"/>
+                    <!-- <KetLuan :is_check="is_check=true"/> -->
+                  </div>
+                  <div class="col-3 div-left mt-4">
+                    <ChiSoSinhTon/>
+                  </div>
                 </div>
               </div>
               <!-- End Khám bệnh ---------------------->
@@ -1442,46 +795,7 @@
                     <div class="tab-content" id="pills-tabContent">
                       <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                         aria-labelledby="pills-home-tab">
-                        <table class="table table-bordered tree-basic">
-                          <thead>
-                            <tr>
-                              <th>Ngày có kết quả</th>
-                              <th>Chỉ số</th>
-                              <th>Kết quả xét nghiệm</th>
-                              <th>Chỉ số bình thường</th>
-                              <th>Đơn vị tính</th>
-                              <th>Ngày chỉ định</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="treegrid-1 expanded">
-                              <td class="font-700" colspan="6">Phòng khám ung bướu</td>
-                            </tr>
-                            <tr class="treegrid-2 treegrid-parent-1">
-                              <td class="font-700" colspan="6">
-                                <input type="checkbox" />
-                                28/10/2019
-                              </td>
-                            </tr>
-                            <tr class="treegrid-3 treegrid-parent-2">
-                              <td class="font-700" colspan="6">
-                                <input type="checkbox" />
-                                Sinh
-                                hóa máu
-                              </td>
-                            </tr>
-                            <tr class="treegrid-4 treegrid-parent-3">
-                              <td>
-                                <input type="checkbox" /> Định lượng Glucose (Máu)
-                              </td>
-                              <td></td>
-                              <td class="color-red">4.0</td>
-                              <td>(4.10 - 5.90)</td>
-                              <td>mmol/l</td>
-                              <td>20/10/2019</td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        <XetNghiem/>
                       </div>
                       <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         ...</div>
@@ -2057,6 +1371,7 @@
         </div>
       </div>
     </div>
+
     <!-- modal THUOC -->
     <div class="modal fade" id="chidinhthuoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
@@ -2956,6 +2271,7 @@
         </div>
       </div>
     </div>
+
     <div class="modal fade chi-tiet-tin-nhan" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -3067,7 +2383,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="chonXN">Chọn</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Chọn</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
