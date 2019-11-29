@@ -145,7 +145,6 @@
             <textarea rows="2" class="form-control indexKetLuan"></textarea>
           </div>
         </div>
-        <KetLuan :is_check="is_check=true"/>
         
       </div>
       <div class="card-footer" v-if="!isHistory">

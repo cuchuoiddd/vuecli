@@ -1,6 +1,6 @@
 // import data_json from './../../assets/data'
-import { store } from "../../store/index.js";
-
+// import { store } from "../../store";
+import { EventBus } from "../../EventBus";
 export default {
     name: "KhachHang",
     props: ["data", "nhom_kh",'item'],
@@ -16,9 +16,7 @@ export default {
     },
     methods: {
         selectBenhNhan(item){
-            // this.$emit('ageWasUpdated', item)
-            console.log('message emit from child component',item)
-            store.setValue(item);
+            EventBus.$emit("selectKH", item);
         }
     },
     created() {

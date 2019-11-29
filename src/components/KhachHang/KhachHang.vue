@@ -1,5 +1,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style src="./KhachHang.css" module lang="css" scope></style>
+<script src="./KhachHang.js" crossorigin="use-credentials"></script>
+
 <template>
   <div class>
     <table class="table table-hover table-borderless font-14">
@@ -15,9 +17,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="row-table" v-for="(item, index) in data" :key="index" @click="selectBenhNhan(item)">
-          <td class="text-center">{{index +11}}</td>
-          <td>{{item.name}}</td>
+        <tr class="row-table" v-for="(item, index) in data" :key="index" >
+          <td class="text-center" @click="selectBenhNhan(item)">{{index +11}}</td>
+          <td @click="selectBenhNhan(item)">{{item.name}}</td>
           <td class="text-center">{{item.year_of_birth}}</td>
           <td class="text-center">{{item.sex}}</td>
           <td class="text-center">{{item.waiting_time}}</td>
@@ -29,5 +31,4 @@
   </div>
 </template>
 
-<script src="./KhachHang.js" crossorigin="use-credentials"></script>
 
