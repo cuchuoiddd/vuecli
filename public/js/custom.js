@@ -1,8 +1,42 @@
 
+$('.sidebar-header select').on('change', e => {
+    console.log(1111111, e.target.value)
+    let key = e.target.value;
+    switch (key) {
+        case "cho_kham":
+            $('#tb-cho-kham').show();
+            $('#tb-hen-kham').hide();
+            $('#tb-cho-doc-kq').hide();
+            $('#tb-ket-thuc-kham').hide();
 
+            break;
+        case "hen_kham":
+            $('#tb-hen-kham').show();
+            $('#tb-cho-kham').hide();
+            $('#tb-cho-doc-kq').hide();
+            $('#tb-ket-thuc-kham').hide();
 
-$(document).ready(function () {
-    
+            break;
+        case "cho_doc_kq":
+            $('#tb-cho-doc-kq').show();
+            $('#tb-hen-kham').hide();
+            $('#tb-cho-kham').hide();
+            $('#tb-ket-thuc-kham').hide();
+
+            break;
+        case "ket_thuc_kham":
+            $('#tb-ket-thuc-kham').show();
+            $('#tb-cho-doc-kq').hide();
+            $('#tb-hen-kham').hide();
+            $('#tb-cho-kham').hide();
+
+            break;
+
+        default:
+            break;
+    }
+});
+
 $('#huongDieuTri').on('change',e=>{
     console.log(1111111, e.target.value)
     let key = e.target.value;
@@ -128,14 +162,15 @@ luuKetLuan = () =>{
     // console.log(23423423, $(".mySelect option:selected").html())
 }
 chonXN=()=>{
-    // let td = $(".tableXetNghiem")[0].rows[4].cells;
-    // if ($('.inputXN').is(":checked")){
-    //     $('.kqCLS').val(
-    //         td[0].innerText.trim() + ' ' + td[2].innerText + ' ' +  td[4].innerText
-    //     )
-    // }
+    let td = $(".tableXetNghiem")[0].rows[4].cells;
+    if ($('.inputXN').is(":checked")){
+        $('.kqCLS').val(
+            td[0].innerText.trim() + ' ' + td[2].innerText + ' ' +  td[4].innerText
+        )
+    }
 }
 
+$(document).ready(function () {
     $("#checkAll").click(function () {
         $('.checkAll .checkItem').not(this).prop('checked', this.checked);
     });

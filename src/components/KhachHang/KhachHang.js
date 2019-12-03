@@ -1,12 +1,12 @@
 // import data_json from './../../assets/data'
 // import { store } from "../../store";
-import { EventBus } from "../../EventBus";
+import EventBus from "../../EventBus"
 export default {
     name: "KhachHang",
-    props: ["data", "nhom_kh",'item'],
+    props: ["data", "nhom_kh", 'item'],
     data() {
         return {
-            
+
             // data: data_json.man_hinh_kham
         };
     },
@@ -15,22 +15,24 @@ export default {
 
     },
     methods: {
-        selectBenhNhan(item){
+        selectBenhNhan(item) {
             EventBus.$emit("selectKH", item);
         }
     },
+
+
+
     created() {
 
     },
-    watch: {
-    },
+    watch: {},
     computed: {
         data_new() {
             this.data_new = this.data;
         }
     },
     filters: {
-        status_name: function (id) {
+        status_name: function(id) {
             return id == '1' ? 'Đang khám' : id == '2' ? 'Ưu tiên' : id == '3' ? 'Hẹn khám' : 'Chờ đọc KQ'
         }
     }

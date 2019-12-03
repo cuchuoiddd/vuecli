@@ -167,5 +167,45 @@
     </div>
 </template>
 
-<script src="./TongQuan.js" crossorigin="use-credentials"></script>
+<script>
+
+export default {
+    name: "TongQuan",
+    components:{},
+    // props: ["item_select","isHistory"],
+    props:{
+        item_select:Object,
+        isHistory:Boolean
+    },
+    data() {
+        return {
+            test:"",
+            abc:"",
+            data :[],
+            item_selected:null
+        }
+    },
+    created() {
+        this.$eventBus.$on('selectKH', (e)=>{
+            console.log(333333333333,e)
+        });
+    },
+    destroyed() {
+        // Stop listening the event selectKH with handler
+      },
+    mounted() {
+        // console.log(111111111111111111,this.isHistory);
+    },
+    methods: {
+    },
+    watch:{
+        item_select: function (newVal) { 
+            this.item_selected = newVal;
+        },
+        abc:function(newVal,oldVal){
+            console.log(333333333333,newVal,oldVal)
+        }
+    }
+};
+</script>
 
