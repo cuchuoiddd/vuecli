@@ -34,3 +34,4 @@ export default {
   color: #42b983;
 }
 </style>
+<style src="../node_modules/vue-select/dist/vue-select.css"></style>

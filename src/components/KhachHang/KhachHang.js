@@ -1,6 +1,6 @@
 // import data_json from './../../assets/data'
 // import { store } from "../../store";
-import EventBus from "../../EventBus"
+import EventBus from "../../store/EventBus"
 export default {
     name: "KhachHang",
     props: ["data", "nhom_kh", 'item'],

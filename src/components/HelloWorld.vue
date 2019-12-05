@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import EventBus from '../EventBus'
+import EventBus from '../store/EventBus'
 
 export default {
   name: 'HelloWorld',
