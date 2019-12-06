@@ -128,7 +128,7 @@
 <script>
 import EventBus from "../store/EventBus";
 import axios from "axios";
-import { getDataUser, addUser } from "../models/test";
+import { getDataUser, addUser, updateUser } from "../models/test";
 import {
   required,
   email,
@@ -217,10 +217,9 @@ export default {
             }
           });
         } else {
-          axios.put(`users/` + this.id, data).then(response => {
-            if (response.data.success) {
-              this.data[this.index] = data;
-              this.data[this.index]["id"] = this.id;
+          updateUser(this.id, data).then(result => {
+            if (result) {
+              this.data[this.index] = result;
               this.resetData();
             } else {
               this.warning();
@@ -238,6 +237,8 @@ export default {
       this.email = "";
       this.password = "";
       this.is_add = true;
+      this.$v.$reset();
+      console.log(111, this.$v);
     },
     warning() {
       window.alert("Đã có lỗi xảy ra");

@@ -23,6 +23,8 @@ async function addUser(data) {
 async function updateUser(id, data) {
     return await axios.put(`users/` + id, data).then(response => {
         if (response.data.success) {
+            console.log(234242, response.data.data);
+
             return response.data.data;
         } else {
             return {};
@@ -30,4 +32,4 @@ async function updateUser(id, data) {
     })
 
 }
-export { getDataUser, addUser }
+export { getDataUser, addUser, updateUser }
