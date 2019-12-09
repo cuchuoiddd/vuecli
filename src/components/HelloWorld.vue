@@ -1,25 +1,15 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <button @click="emitGlobalClickEvent">
-      Click me!
-    </button>
   </div>
 </template>
 
 <script>
-import EventBus from '../store/EventBus'
-
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  },
-  methods: {
-    emitGlobalClickEvent() {
-      // Send the event on a channel (hello) with a payload
-      EventBus.$emit('hello', 'i hear you');
-      console.log(23423)
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
     }
   }
 }
@@ -27,8 +17,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+h1, h2 {
+  font-weight: normal;
 }
 ul {
   list-style-type: none;

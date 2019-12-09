@@ -1,21 +1,28 @@
-import HelloWorld from '@/components/HelloWorld.vue'
-import Test from '@/components/Test.vue'
-import KhachHang from '@/components/KhachHang/KhachHang.vue'
-import TongQuan from '@/components/TongQuan/TongQuan.vue'
-import data_json from './../../assets/data'
+import { getRequest } from "../../models/test"
+import EventBus from '../../store/EventBus'
 export default {
     name: 'home',
-    components: {
-        HelloWorld,
-        Test,
-        KhachHang,
-        TongQuan
-    },
+    components: {},
     data() {
         return {
-            data: data_json.man_hinh_kham,
-            nhom_kh: 'hen_kham',
-
+            data: []
         };
     },
+    created() {
+        this.msg();
+        this.listCategory();
+    },
+    mounted() {
+
+    },
+    methods: {
+        msg() {
+            EventBus.$emit('msg', 'Trang chủ')
+        },
+        listCategory() {
+            getRequest('categories').then(result => {
+                this.data = result;
+            });
+        },
+    }
 }

@@ -1,17 +1,32 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/"></router-link>
-      <router-link to="/about">About</router-link>
-    </div> -->
-    <router-view />
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <HeaderComponent />
+        </div>
+        <div class="card-body">
+          <router-view />
+        </div>
+        <div class="card-footer text-muted">
+          <FooterComponent />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
 <script>
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import HeaderComponent from "@/components/HeaderComponent";
+import FooterComponent from "@/components/FooterComponent";
 export default {
-  name:'App'
+  name: "App",
+  components: { HeaderComponent, FooterComponent }
 };
 </script>
+
 <style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -20,18 +35,4 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
-<style src="../node_modules/vue-select/dist/vue-select.css"></style>
