@@ -10,6 +10,15 @@ export default {
             is_add: true,
             name: '',
             description: '',
+            countries: [{
+                    countryCode: "CA",
+                    countryName: "Canada"
+                },
+                {
+                    countryCode: "1",
+                    countryName: "Canada1"
+                }
+            ]
         };
     },
     created() {

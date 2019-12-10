@@ -2,7 +2,7 @@
   <div class="category">
     <div class="row" style="flex-flow: row-reverse;">
       <!-- <button class="btn btn-primary" @click="add">Add Category</button> -->
-      <b-button v-b-modal.modal-1 variant="primary" @click="add">Add Category</b-button>
+      <b-button variant="primary" @click="add">Add Category</b-button>
     </div>
     <div class="row">
       <table class="table table-hover">
@@ -25,7 +25,7 @@
           </td>
           <td>
             <button class="btn btn-sm btn-info" @click="edit(item,index)">edit</button>
-            <button class="btn btn-sm btn-danger" @click="remove(item.id)">delete</button>
+            <button class="btn btn-sm btn-danger" @click="remove(item)">delete</button>
           </td>
         </tr>
       </table>

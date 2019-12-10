@@ -1,8 +1,12 @@
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost/qlsach/public/api/";
-
+const _header = {
+    "Content-Type": "application/x-www-form-urlencoded"
+}
 async function getRequest(_path) {
+    console.log(333333333, _path);
     return await axios.get(_path).then(response => {
+
         if (response.data.success) {
             return response.data.data;
         } else {
@@ -11,7 +15,9 @@ async function getRequest(_path) {
     })
 }
 async function postRequest(_path, data) {
-    return await axios.post(_path, data).then(response => {
+    console.log(123123, data);
+
+    return await axios.post(_path, data, _header).then(response => {
         console.log(111111111);
 
         if (response.data.success) {

@@ -5,7 +5,7 @@ import {
     minLength,
     maxLength
 } from "vuelidate/lib/validators";
-
+const url = 'categories';
 export default {
     name: 'category',
     components: {},
@@ -34,11 +34,16 @@ export default {
             EventBus.$emit('msg', 'Category')
         },
         listCategory() {
-            getRequest('categories').then(result => {
+            getRequest(url).then(result => {
+                console.log(22222222, result)
                 this.data = result;
             });
         },
-        add() {},
+        add() {
+            this.resetValue();
+            this.$refs['my-modal'].show();
+
+        },
         edit(item, index) {
             this.$v.$reset();
 
@@ -63,7 +68,7 @@ export default {
                 return;
             } else {
                 if (this.is_add) {
-                    postRequest('categories', data).then(result => {
+                    postRequest(url, data).then(result => {
                         if (result) {
                             this.data.push(result);
                             this.resetValue();
@@ -72,7 +77,7 @@ export default {
                         }
                     });
                 } else {
-                    putRequest('categories/' + this.id, data).then(result => {
+                    putRequest(url + '/' + this.id, data).then(result => {
                         if (result) {
                             this.data[this.index] = result;
                             this.resetValue();
@@ -83,10 +88,20 @@ export default {
                 }
             }
         },
-        remove(id) {},
-        cancel() { this.resetValue() },
+        remove(item) {
+            if (confirm('Bạn có chắc chắn xóa: ' + item.name)) {
+                deleteRequest(url + '/' + item.id).then(result => {
+                    if (result) {
+                        this.data = this.data.filter(f => f.id != item.id);
+                    } else { this.warning() }
+                })
+            }
+        },
+        cancel() {
+            this.resetValue();
+        },
         changeStatus(event, item) {
-            putRequest('updateSatusCategory/' + item.id, { status: event.target.checked }).then(result => {
+            putRequest('updateStatusCategory/' + item.id, { status: event.target.checked }).then(result => {
                 if (result) {}
             })
         },

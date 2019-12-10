@@ -5,6 +5,7 @@
       <b-button v-b-modal.modal-1 variant="primary" @click="add">Add Book</b-button>
     </div>
     <div class="row">
+        <v-select class="form-control" label="countryName" :options="countries"></v-select>
       <table class="table table-hover">
         <tr>
           <th>#</th>
