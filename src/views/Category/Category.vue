@@ -5,7 +5,7 @@
       <b-button variant="primary" @click="add">Add Category</b-button>
     </div>
     <div class="row">
-      <table class="table table-hover">
+      <table class="table table-hover" id="my-table">
         <tr>
           <th>#</th>
           <th>name</th>
@@ -28,6 +28,17 @@
             <button class="btn btn-sm btn-danger" @click="remove(item)">delete</button>
           </td>
         </tr>
+        <tr>
+          <td colspan="5" class="text-center">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="rows"
+              :per-page="perPage"
+              aria-controls="my-table"
+              @input="pagi"
+            ></b-pagination>
+          </td>
+        </tr>
       </table>
     </div>
     <b-modal id="modal-1" title="Danh mục" hide-footer ref="my-modal">
@@ -40,7 +51,6 @@
             :class="{'is-invalid':$v.name.$error, 'is-valid':!$v.name.$invalid}"
             class="form-control"
           />
-          <div class="valid-feedback">Ngon ngay</div>
           <div class="invalid-feedback">
             <span v-if="!$v.name.required">Không đc bỏ trống</span>
             <span v-if="!$v.name.minLength">K đc nhỏ hơn {{$v.name.$params.minLength.min}} ký tự</span>

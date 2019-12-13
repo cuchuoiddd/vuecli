@@ -11,7 +11,10 @@ export default {
     components: {},
     data() {
         return {
+            perPage: 2,
+            currentPage: 1,
             data: [],
+            rows: 0,
             is_add: true,
             id: '',
             index: '',
@@ -21,6 +24,7 @@ export default {
     },
     created() {
         this.msg();
+        this.getTotal();
         this.listCategory();
     },
     mounted() {
@@ -30,13 +34,24 @@ export default {
         name: { required, minLength: minLength(3), maxLength: maxLength(10) }
     },
     methods: {
+        getTotal() {
+            getRequest( url +'/'+'gettotal').then(result => {
+                this.rows = result;
+            })
+        },
+        pagi(e) {
+            // console.log(123, e)
+            getRequest(url+'?page='+e).then(result=>{
+                this.data = result.data;
+            })
+        },
         msg() {
             EventBus.$emit('msg', 'Category')
         },
         listCategory() {
             getRequest(url).then(result => {
                 console.log(22222222, result)
-                this.data = result;
+                this.data = result.data;
             });
         },
         add() {
@@ -102,7 +117,7 @@ export default {
         },
         changeStatus(event, item) {
             putRequest('updateStatusCategory/' + item.id, { status: event.target.checked }).then(result => {
-                if (result) {}
+                if (result) { }
             })
         },
         resetValue() {
@@ -118,5 +133,10 @@ export default {
         warning() {
             window.alert("Đã có lỗi xảy ra");
         }
+    },
+    computed: {
+        // rows() {
+        //     return this.data.length
+        //   }
     }
 }

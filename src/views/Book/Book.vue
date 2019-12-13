@@ -5,22 +5,30 @@
       <b-button v-b-modal.modal-1 variant="primary" @click="add">Add Book</b-button>
     </div>
     <div class="row">
-        <v-select class="form-control" label="countryName" :options="countries"></v-select>
+      <v-select
+        style="width:300px"
+        v-model="selected"
+        label="name"
+        @input="setSelected"
+        :reduce="r=>r.id"
+        :options="data_ctg"
+        :selectable="option => option.status"
+      ></v-select>
       <table class="table table-hover">
         <tr>
           <th>#</th>
-          <th>name</th>
-          <th>description</th>
+          <th>Name</th>
+          <th>Description</th>
           <th>Status</th>
           <th>control</th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>Củ chuối</td>
-          <td>Mô tả</td>
+        <tr v-for="(item,index) in data" :key="index">
+          <td>{{index +1}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.description}}</td>
           <td>
             <label class="switch">
-              <input type="checkbox" checked @click="changeStatus($event)" />
+              <input type="checkbox" :checked="item.status" @click="changeStatus($event)" />
               <span class="slider round"></span>
             </label>
           </td>
@@ -40,6 +48,21 @@
         <div class="row form-group">
           <label for>Description</label>
           <input type="text" v-model="description" class="form-control" />
+        </div>
+        <div class="row form-group">
+          <label for>Code</label>
+          <input type="text" v-model="code" class="form-control" />
+        </div>
+        <div class="row form-group">
+          <label for>Danh mục</label>
+          <v-select
+            style="width:100%"
+            :options="data_ctg"
+            v-model="selected_ctg"
+            label="name"
+            :reduce="r => r.id"
+            :selectable="option => option.status"
+          ></v-select>
         </div>
       </div>
       <div class="footer float-right">
